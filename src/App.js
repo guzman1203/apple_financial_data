@@ -132,15 +132,15 @@ const App = () => {
   return (
     <div className="container mx-auto p-4">
       <Helmet>
-        <title>ValueGlance Fin.Data</title>
+        <title>ValueGlance-> Apple Financial Data</title>
         <link
           rel="icon"
           type="image/png"
-          href="/favicon-16x16.png"
+          href="favicon.ico"
         />
       </Helmet>
       <h1 className="text-2xl font-bold text-center mb-4">
-        Financial Data Table
+        Apple Financial Data Table
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
