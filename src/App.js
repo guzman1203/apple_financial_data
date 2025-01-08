@@ -1,26 +1,11 @@
-/* import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-} */
+//===============================================================================================================
+// Name        : App.js
+// Author      : ValueGlance
+// Version     : 01/07/2025
+// Description : Build a financial data filtering app using data from a single API endpoint. 
+//               The app will fetch annual income statements for AAPL (Apple) and allow users to filter
+//               and analyze key metrics.
+//==============================================================================================================
 
 // Import necessary modules
 import React, { useState, useEffect } from 'react';
@@ -132,7 +117,7 @@ const App = () => {
   return (
     <div className="container mx-auto p-4">
       <Helmet>
-        <title>ValueGlance-> Apple Financial Data</title>
+        <title>ValueGlance Analysis</title>
         <link
           rel="icon"
           type="image/png"
@@ -140,7 +125,7 @@ const App = () => {
         />
       </Helmet>
       <h1 className="text-2xl font-bold text-center mb-4">
-        Apple Financial Data Table
+        Apple Financial Data 
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
