@@ -2,19 +2,19 @@
 // Name        : App.js
 // Author      : ValueGlance
 // Version     : 01/07/2025
-// Description : Build a financial data filtering app using data from a single API endpoint. 
-//               The app will fetch annual income statements for AAPL (Apple) and allow users to filter
-//               and analyze key metrics.
+// Description : Frontend implemented with React + TailwindCSS to build a financial data filtering app using data 
+//               from a single API endpoint. The app will fetch annual income statements for AAPL (Apple)
+//               and allow users to filter and analyze key metrics.
 //==============================================================================================================
 
 // Import necessary modules
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from 'react';
+//import axios from 'axios';
 import './App.css';
 import { Helmet } from 'react-helmet';
 
 const App = () => {
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [filters, setFilters] = useState({
     dateRange: { start: '', end: '' },
@@ -23,63 +23,61 @@ const App = () => {
   });
   const [sort, setSort] = useState({ column: '', direction: '' });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'https://financialmodelingprep.com/api/v3/income-statement/AAPL?period=annual&apikey=KaRGb55gHi9wkGtPjEftgw5mQI0iGsqX'
+  // fetch data from a single API endpoint.
+  // clean up the code and avoid re-creating the fetchData function on every render, memoize it using useCallback
+  //useEffect(() => {
+  const fetchData = useCallback(async () => {
+    try {
+        const response = await fetch(
+            `http://127.0.0.1:5000/api/data?start_year=${filters.dateRange.start}&end_year=${filters.dateRange.end}&min_revenue=${filters.revenue.min}&max_revenue=${filters.revenue.max}&min_netIncome=${filters.netIncome.min}&max_netIncome=${filters.netIncome.max}&sort_key=${sort.column}&sort_order=${sort.direction}`
         );
-        setData(response.data);
-        setFilteredData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+        const data = await response.json();
+        setFilteredData(data);
+    } catch (error) {
+        console.error("Error fetching data from backend:", error);
+    }
+  }, [
+    filters.dateRange.start,
+    filters.dateRange.end,
+    filters.revenue.min,
+    filters.revenue.max,
+    filters.netIncome.min,
+    filters.netIncome.max,
+    sort.column,
+    sort.direction,
+  ]);
+  
+  //});
+  
+  // define the filters to apply
+  const applyFilters = async () => {
+    try {
+      const query = new URLSearchParams({
+        start_year: filters.dateRange.start || undefined,
+        end_year: filters.dateRange.end || undefined,
+		
+        min_revenue: filters.revenue.min || undefined,
+        max_revenue: filters.revenue.max || undefined,
+		
+        min_netIncome: filters.netIncome.min || undefined,
+        max_netIncome: filters.netIncome.max || undefined,
+		
+        sort_key: sort.column || undefined,
+        sort_order: sort.direction || undefined,
+      }).toString();
+
+      const response = await fetch(`http://127.0.0.1:5000/api/data?${query}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
-
-    fetchData();
-  }, []);
-
-  const applyFilters = () => {
-    let filtered = data;
-
-    // Filter by date range
-    if (filters.dateRange.start && filters.dateRange.end) {
-      filtered = filtered.filter((item) => {
-        const year = parseInt(item.date.split('-')[0], 10);
-        return (
-          year >= parseInt(filters.dateRange.start, 10) &&
-          year <= parseInt(filters.dateRange.end, 10)
-        );
-      });
+      const filteredData = await response.json();
+      setFilteredData(filteredData);
+    } catch (error) {
+        console.error("Error applying filters:", error);
     }
-
-    // Filter by revenue range
-    if (filters.revenue.min || filters.revenue.max) {
-      filtered = filtered.filter((item) => {
-        const revenue = parseFloat(item.revenue);
-        return (
-          (!filters.revenue.min || revenue >= parseFloat(filters.revenue.min)) &&
-          (!filters.revenue.max || revenue <= parseFloat(filters.revenue.max))
-        );
-      });
-    }
-
-    // Filter by net income range
-    if (filters.netIncome.min || filters.netIncome.max) {
-      filtered = filtered.filter((item) => {
-        const netIncome = parseFloat(item.netIncome);
-        return (
-          (!filters.netIncome.min ||
-            netIncome >= parseFloat(filters.netIncome.min)) &&
-          (!filters.netIncome.max ||
-            netIncome <= parseFloat(filters.netIncome.max))
-        );
-      });
-    }
-
-    setFilteredData(filtered);
   };
-
+ 
+  // define the sorts to apply
   const applySort = (column) => {
     const direction = sort.direction === 'asc' ? 'desc' : 'asc';
     const sorted = [...filteredData].sort((a, b) => {
@@ -97,6 +95,7 @@ const App = () => {
     setFilteredData(sorted);
   };
 
+  // get Currency Symbol from locale
   const getCurrencySymbol = () => {
     return new Intl.NumberFormat(navigator.language, {
       style: 'currency',
@@ -107,12 +106,18 @@ const App = () => {
       .find((part) => part.type === 'currency').value;
   };
 
+  // render Sort Arrow to show the sort asc or desc
   const renderSortArrow = (column) => {
     if (sort.column === column) {
       return sort.direction === 'asc' ? ' ▲' : ' ▼';
     }
     return '';
   };
+  
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+  
 
   return (
     <div className="container mx-auto p-4">
@@ -125,7 +130,7 @@ const App = () => {
         />
       </Helmet>
       <h1 className="text-2xl font-bold text-center mb-4">
-        Apple Financial Data 
+        Apple's Financial Dashboard 
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
