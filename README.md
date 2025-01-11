@@ -31,7 +31,7 @@
  ■ The App is mobile-friendly and looks good on both desktop and mobile devices.
  
 
- Technical Requirements:
+ ■ Technical Requirements:
  1. Frontend:
  ○ Using React(JavaScript).
  ○ Styling implemented with TailwindCSS.
@@ -39,8 +39,8 @@
  2. Backend:
  ○ Using Python with Flask.
  ○ The backend:
-     ■ Fetch data from the API.
-     ■ Handle filtering and sorting based on user requests.
-     ■ Expose an endpoint for the frontend to fetch filtered data.
+     a. Fetch data from the API.
+     b. Handle filtering and sorting based on user requests.
+     c. Expose an endpoint for the frontend to fetch filtered data.
     
  3. App deployed on Render, with link: https://apple-financial-data-frontend.onrender.com/
