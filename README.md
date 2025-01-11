@@ -39,4 +39,5 @@
     2. Handle filtering and sorting based on user requests.
     3. Expose an endpoint for the frontend to fetch filtered data.
     
- 4. App deployed on Render, with link: https://apple-financial-data-frontend.onrender.com/
+ 4. App frontend and backend deployed on Render.
+ 5. Link: https://apple-financial-data-frontend.onrender.com/
