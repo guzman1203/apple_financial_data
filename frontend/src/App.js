@@ -22,17 +22,21 @@ const App = () => {
     netIncome: { min: '', max: '' },
   });
   const [sort, setSort] = useState({ column: '', direction: '' });
+  
+  const BASE_URL = "https://apple-financial-data.onrender.com";
 
   // fetch data from a single API endpoint.
   // clean up the code and avoid re-creating the fetchData function on every render, memoize it using useCallback
   //useEffect(() => {
   const fetchData = useCallback(async () => {
     try {
-        const response = await fetch(
-            `http://127.0.0.1:5000/api/data?start_year=${filters.dateRange.start}&end_year=${filters.dateRange.end}&min_revenue=${filters.revenue.min}&max_revenue=${filters.revenue.max}&min_netIncome=${filters.netIncome.min}&max_netIncome=${filters.netIncome.max}&sort_key=${sort.column}&sort_order=${sort.direction}`
-        );
+        const API_URL = `${BASE_URL}/api/data?start_year=${filters.dateRange.start}&end_year=${filters.dateRange.end}&min_revenue=${filters.revenue.min}&max_revenue=${filters.revenue.max}&min_netIncome=${filters.netIncome.min}&max_netIncome=${filters.netIncome.max}&sort_key=${sort.column}&sort_order=${sort.direction}`;
+
+        const response = await fetch(API_URL);
+
         const data = await response.json();
         setFilteredData(data);
+		
     } catch (error) {
         console.error("Error fetching data from backend:", error);
     }
