@@ -32,12 +32,9 @@
  
 
  ■ Technical Requirements:
- 1. Frontend:
- ○ Using React(JavaScript).
- ○ Styling implemented with TailwindCSS.
+ 1. Frontend: Using React(JavaScript). Styling implemented with TailwindCSS.
 
- 2. Backend:
- ○ Using Python with Flask.
+ 2. Backend: Using Python with Flask. 
  ○ The backend:
      a. Fetch data from the API.
      b. Handle filtering and sorting based on user requests.
