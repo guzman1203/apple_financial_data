@@ -11,12 +11,12 @@
  key financial data such as revenue, net income, gross profit, expenses, etc.
  
  1. The Apple Financial Dashboard is a table that include the following columns:
-     ■ Date(e.g., "2024-09-28")
-     ■ Revenue
-     ■ Net Income
-     ■ Gross Profit
-     ■ EPS(Earnings Per Share)
-     ■ Operating Income
+Date(e.g., "2024-09-28")
+Revenue
+Net Income
+Gross Profit
+EPS(Earnings Per Share)
+Operating Income
 
  3. Apply Filters button allows users to filter the data using the following criteria:
      ■ Date Range: Filter results between specific years (e.g., 2020–2024).
