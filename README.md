@@ -18,17 +18,17 @@
      ■ EPS(Earnings Per Share)
      ■ Operating Income
 
- 2. Apply Filters button allows users to filter the data using the following criteria:
+ 3. Apply Filters button allows users to filter the data using the following criteria:
      ■ Date Range: Filter results between specific years (e.g., 2020–2024).
      ■ Revenue: Filter rows where Revenue falls within a user-specified range.
      ■ Net Income: Filter rows where Net Income falls within a user-specified range.
 
- 3. Sorting, by clicking the column header, allows users to sort the table by:
+ 4. Sorting, by clicking the column header, allows users to sort the table by:
      ■ Date(ascending/descending).
      ■ Revenue(ascending/descending).
      ■ Net Income (ascending/descending).
     
- 4. The App is mobile-friendly and looks good on both desktop and mobile devices.
+ 5. The App is mobile-friendly and looks good on both desktop and mobile devices.
  
 
  Technical Requirements:
