@@ -35,8 +35,8 @@
  1. Frontend: Using React(JavaScript). Styling implemented with TailwindCSS.
 
  2. Backend: Using Python with Flask.
-     a. Fetch data from the API.
-     b. Handle filtering and sorting based on user requests.
-     c. Expose an endpoint for the frontend to fetch filtered data.
+    1. Fetch data from the API.
+    2. Handle filtering and sorting based on user requests.
+    3. Expose an endpoint for the frontend to fetch filtered data.
     
  4. App deployed on Render, with link: https://apple-financial-data-frontend.onrender.com/
